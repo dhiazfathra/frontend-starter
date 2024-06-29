@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 
 const sidebarItems = [
   { id: 'screener', name: 'Screener', icon: '📊' },
@@ -16,10 +18,22 @@ const sidebarItems = [
 ];
 
 const Sidebar: React.FC = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
   return (
-    <div className="w-64 bg-white shadow-md">
-      <div className="border-b p-4">
-        <h1 className="text-xl font-bold">GLAM *+</h1>
+    <div
+      className={`bg-white shadow-md transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-64'}`}
+    >
+      <div className="flex items-center justify-between border-b p-4">
+        <h1 className={`text-xl font-bold ${isCollapsed ? 'hidden' : ''}`}>
+          GLAM *+
+        </h1>
+        <button
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          className="text-gray-500 hover:text-gray-700"
+        >
+          {isCollapsed ? '➡️' : '⬅️'}
+        </button>
       </div>
       <nav className="mt-4">
         <ul>
@@ -30,13 +44,13 @@ const Sidebar: React.FC = () => {
             >
               <a href="#" className="flex items-center space-x-2">
                 <span>{item.icon}</span>
-                <span>{item.name}</span>
+                <span className={isCollapsed ? 'hidden' : ''}>{item.name}</span>
               </a>
             </li>
           ))}
         </ul>
       </nav>
-      <div className="mt-4 px-4">
+      <div className={`mt-4 px-4 ${isCollapsed ? 'hidden' : ''}`}>
         <button className="w-full rounded bg-gray-200 py-2 text-gray-700 hover:bg-gray-300">
           + Create Product
         </button>
