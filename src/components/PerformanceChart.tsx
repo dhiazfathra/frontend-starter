@@ -10,14 +10,41 @@ import {
   YAxis,
 } from 'recharts';
 
-const data = [
-  { name: 'Jan', value: 25.4 },
-  { name: 'Feb', value: 25.6 },
-  { name: 'Mar', value: 25.8 },
-  { name: 'Apr', value: 26.0 },
-  { name: 'May', value: 26.2 },
-  { name: 'Jun', value: 26.4 },
-];
+interface GbsData {
+  date: string;
+  value: number;
+}
+
+function generateGbsData(startDate: Date, endDate: Date): GbsData[] {
+  const data: GbsData[] = [];
+  const days: number = Math.floor(
+    (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24),
+  );
+
+  for (let i: number = 0; i <= days; i++) {
+    const currentDate: Date = new Date(startDate);
+    currentDate.setDate(startDate.getDate() + i);
+
+    const value: number = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;
+
+    data.push({
+      date: currentDate.toISOString().split('T')[0],
+      value,
+    });
+  }
+
+  if (data.length > 0) {
+    data[0].value = 100;
+    data[data.length - 1].value = 1000;
+  }
+
+  return data;
+}
+
+const startDate: Date = new Date('2024-06-01');
+const endDate: Date = new Date('2024-06-30');
+
+const data: GbsData[] = generateGbsData(startDate, endDate);
 
 interface PerformanceChartProps {
   isDarkMode: boolean;
