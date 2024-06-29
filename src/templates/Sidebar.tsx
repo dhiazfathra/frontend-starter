@@ -16,7 +16,6 @@ const sidebarItems = [
   { id: 'deai', name: 'DEAI', icon: '🤖' },
   { id: 'stable', name: 'STABLE', icon: '💰' },
 ];
-
 const Sidebar: React.FC = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -26,12 +25,12 @@ const Sidebar: React.FC = () => {
         onClick={() => setIsCollapsed(!isCollapsed)}
         className="fixed left-4 top-4 z-50 rounded-full bg-white p-2 text-gray-500 shadow-md hover:text-gray-700 md:hidden"
       >
-        {isCollapsed ? '➡️' : '⬅️'}
+        {isCollapsed ? '☰' : '✕'}
       </button>
       <div
         className={`fixed inset-y-0 left-0 z-40 bg-white shadow-md transition-all duration-300 ${
           isCollapsed ? '-translate-x-full' : 'translate-x-0'
-        } md:relative md:translate-x-0 ${isCollapsed ? 'w-0 md:w-16' : 'w-full md:w-64'}`}
+        } md:relative md:translate-x-0 ${isCollapsed ? 'w-0 md:w-16' : 'w-64'}`}
       >
         <div className="flex h-16 items-center justify-between border-b p-4">
           <h1 className={`text-xl font-bold ${isCollapsed ? 'hidden' : ''}`}>
