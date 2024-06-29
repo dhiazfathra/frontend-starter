@@ -1,6 +1,7 @@
 // pages/GBSPage.tsx
 import React from 'react';
 
+import DetailSidebar from '@/templates/DetailSidebar';
 import { FundDetails } from '@/templates/FundDetails';
 import Sidebar from '@/templates/Sidebar';
 
@@ -8,7 +9,7 @@ const GBSPage: React.FC = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="flex-1">
+      <div className="flex flex-1 flex-col">
         <div className="container mx-auto p-4">
           <div className="breadcrumbs pb-4 text-sm">
             <ul className="flex items-center space-x-2">
@@ -27,7 +28,12 @@ const GBSPage: React.FC = () => {
               </li>
             </ul>
           </div>
-          <FundDetails />
+          <div className="flex">
+            <div className="flex-1">
+              <FundDetails />
+            </div>
+            <DetailSidebar />
+          </div>
         </div>
       </div>
     </div>
