@@ -27,18 +27,29 @@ function FundInfoCard({
   subtitle?: string;
 }) {
   return (
-    <div className="rounded-lg bg-gray-100 p-4">
-      <h3 className="text-sm font-medium text-gray-500">{title}</h3>
-      <div className="text-lg font-semibold">{value}</div>
-      {subtitle && <div className="text-xs text-gray-400">{subtitle}</div>}
+    <div className="rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
+      <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+        {title}
+      </h3>
+      <div className="text-lg font-semibold dark:text-white">{value}</div>
+      {subtitle && (
+        <div className="text-xs text-gray-400 dark:text-gray-500">
+          {subtitle}
+        </div>
+      )}
     </div>
   );
 }
 
 export function FundDetails() {
   const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
+
   return (
-    <div className="space-y-4">
+    <div className={`space-y-4 ${isDarkMode ? 'dark' : ''}`}>
       <Card className="p-6">
         <div className="flex items-center space-x-4">
           <div className="size-16 rounded-lg bg-gradient-to-br from-gray-700 to-black" />
@@ -99,7 +110,7 @@ export function FundDetails() {
               <Sun className="size-4" />
               <Switch
                 checked={isDarkMode}
-                onCheckedChange={setIsDarkMode}
+                onCheckedChange={toggleDarkMode}
                 aria-label="Toggle dark mode"
               />
               <Moon className="size-4" />

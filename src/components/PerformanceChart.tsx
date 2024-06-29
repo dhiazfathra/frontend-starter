@@ -61,3 +61,5 @@ export function PerformanceChart({ isDarkMode }: PerformanceChartProps) {
     </ResponsiveContainer>
   );
 }
+
+export default PerformanceChart;

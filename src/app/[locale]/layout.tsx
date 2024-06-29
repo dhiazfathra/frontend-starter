@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
 
+import DarkModeProvider from '@/components/DarkModeProvider';
 import { AllLocales } from '@/utils/AppConfig';
 
 export const metadata: Metadata = {
@@ -44,12 +45,14 @@ export default function RootLayout(props: {
   return (
     <html lang={props.params.locale}>
       <body className="bg-background text-foreground antialiased">
-        <NextIntlClientProvider
-          locale={props.params.locale}
-          messages={messages}
-        >
-          {props.children}
-        </NextIntlClientProvider>
+        <DarkModeProvider>
+          <NextIntlClientProvider
+            locale={props.params.locale}
+            messages={messages}
+          >
+            {props.children}
+          </NextIntlClientProvider>
+        </DarkModeProvider>
       </body>
     </html>
   );
