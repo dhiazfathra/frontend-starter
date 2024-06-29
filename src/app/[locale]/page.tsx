@@ -7,8 +7,10 @@ import Sidebar from '@/templates/Sidebar';
 const GBSPage: React.FC = () => {
   return (
     <div className="flex flex-col md:flex-row">
+      {' '}
+      {/* Flex column for mobile, row for desktop */}
       <Sidebar />
-      <div className="flex flex-1 flex-col">
+      <div className="flex-1">
         <div className="container mx-auto p-4">
           <div className="breadcrumbs pb-4 text-sm">
             <ul className="flex items-center space-x-2">
@@ -28,7 +30,11 @@ const GBSPage: React.FC = () => {
             </ul>
           </div>
           <div className="flex flex-col md:flex-row">
-            <div className="mb-4 flex-1 md:mb-0 md:mr-4">
+            {' '}
+            {/* Flex column for mobile, row for desktop */}
+            <div className="mb-4 flex-1 md:mr-4">
+              {' '}
+              {/* Full width on mobile, margin on desktop */}
               <FundDetails />
             </div>
             <DetailSidebar />
