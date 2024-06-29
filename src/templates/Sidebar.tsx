@@ -22,7 +22,7 @@ const Sidebar: React.FC = () => {
 
   return (
     <div
-      className={`bg-white shadow-md transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-64'}`}
+      className={`bg-gray-200 shadow-md transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-64'}`}
     >
       <div className="flex items-center justify-between border-b p-4">
         <h1 className={`text-xl font-bold ${isCollapsed ? 'hidden' : ''}`}>
@@ -31,6 +31,7 @@ const Sidebar: React.FC = () => {
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
           className="text-gray-500 hover:text-gray-700"
+          type="button"
         >
           {isCollapsed ? '➡️' : '⬅️'}
         </button>
@@ -40,18 +41,24 @@ const Sidebar: React.FC = () => {
           {sidebarItems.map((item) => (
             <li
               key={item.id}
-              className="cursor-pointer px-4 py-2 hover:bg-gray-100"
+              className="cursor-pointer px-4 py-2 hover:bg-gray-300"
             >
-              <a href="#" className="flex items-center space-x-2">
+              <button
+                className="flex w-full items-center space-x-2 text-left"
+                type="button"
+              >
                 <span>{item.icon}</span>
                 <span className={isCollapsed ? 'hidden' : ''}>{item.name}</span>
-              </a>
+              </button>
             </li>
           ))}
         </ul>
       </nav>
       <div className={`mt-4 px-4 ${isCollapsed ? 'hidden' : ''}`}>
-        <button className="w-full rounded bg-gray-200 py-2 text-gray-700 hover:bg-gray-300">
+        <button
+          className="w-full rounded bg-gray-300 py-2 text-gray-700 hover:bg-gray-400"
+          type="button"
+        >
           + Create Product
         </button>
       </div>

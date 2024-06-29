@@ -1,38 +1,23 @@
 import React from 'react';
 
+import Breadcrumbs from '@/components/Breadcrumbs';
 import DetailSidebar from '@/templates/DetailSidebar';
 import { FundDetails } from '@/templates/FundDetails';
 import Sidebar from '@/templates/Sidebar';
 
 const GBSPage: React.FC = () => {
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       <Sidebar />
-      <div className="flex flex-1 flex-col">
-        <div className="container mx-auto p-4">
-          <div className="breadcrumbs pb-4 text-sm">
-            <ul className="flex items-center space-x-2">
-              <li>
-                <a href="/" className="text-gray-700 hover:text-blue-500">
-                  Screener
-                </a>
-              </li>
-              <li className="text-gray-500">
-                <span>&gt;</span>
-              </li>
-              <li>
-                <a href="/" className="text-gray-700 hover:text-blue-500">
-                  GBS
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="flex">
-            <div className="flex-1">
+      <div className="flex flex-1 flex-col overflow-hidden">
+        <div className="flex flex-1 overflow-hidden">
+          <div className="flex-1 overflow-y-auto">
+            <div className="container mx-auto p-4">
+              <Breadcrumbs />
               <FundDetails />
             </div>
-            <DetailSidebar />
           </div>
+          <DetailSidebar />
         </div>
       </div>
     </div>
