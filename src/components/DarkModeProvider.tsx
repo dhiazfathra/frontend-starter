@@ -1,6 +1,12 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
 interface DarkModeContextType {
   isDarkMode: boolean;
@@ -33,8 +39,8 @@ export default function DarkModeProvider({
       (!('theme' in localStorage) &&
         window.matchMedia('(prefers-color-scheme: dark)').matches)
     ) {
-      setIsDarkMode(true);
-      document.documentElement.classList.add('dark');
+      // setIsDarkMode(true);
+      // document.documentElement.classList.add('dark');
     } else {
       setIsDarkMode(false);
       document.documentElement.classList.remove('dark');
@@ -55,8 +61,13 @@ export default function DarkModeProvider({
     });
   };
 
+  // Memoize the context value
+  const contextValue = useMemo(() => {
+    return { isDarkMode, toggleDarkMode };
+  }, [isDarkMode]);
+
   return (
-    <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
+    <DarkModeContext.Provider value={contextValue}>
       <div className={isDarkMode ? 'dark' : ''}>{children}</div>
     </DarkModeContext.Provider>
   );
