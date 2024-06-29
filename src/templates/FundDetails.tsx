@@ -105,6 +105,7 @@ export function FundDetails() {
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-xl font-semibold">Performance</h2>
             <div className="flex items-center space-x-2">
+              {/* FIXME: Fix dark mode state */}
               {/* <Sun className="size-4" />
               <Switch
                 checked={isDarkMode}

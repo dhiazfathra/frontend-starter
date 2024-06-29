@@ -39,6 +39,7 @@ export default function DarkModeProvider({
       (!('theme' in localStorage) &&
         window.matchMedia('(prefers-color-scheme: dark)').matches)
     ) {
+      // FIXME: Fix dark mode state
       // setIsDarkMode(true);
       // document.documentElement.classList.add('dark');
     } else {
