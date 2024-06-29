@@ -19,7 +19,11 @@ const data = [
   { name: 'Jun', value: 26.4 },
 ];
 
-export function PerformanceChart() {
+interface PerformanceChartProps {
+  isDarkMode: boolean;
+}
+
+export function PerformanceChart({ isDarkMode }: PerformanceChartProps) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -30,16 +34,26 @@ export function PerformanceChart() {
     return null; // or a loading placeholder
   }
 
+  const textColor = isDarkMode ? '#ffffff' : '#000000';
+  const lineColor = isDarkMode ? '#8884d8' : '#82ca9d';
+  const tooltipStyle = {
+    backgroundColor: isDarkMode ? '#333' : '#fff',
+    border: 'none',
+    borderRadius: '5px',
+    padding: '10px',
+    color: textColor,
+  };
+
   return (
     <ResponsiveContainer width="100%" height={300}>
       <LineChart data={data}>
-        <XAxis dataKey="name" />
-        <YAxis domain={['dataMin', 'dataMax']} />
-        <Tooltip />
+        <XAxis dataKey="name" stroke={textColor} />
+        <YAxis domain={['dataMin', 'dataMax']} stroke={textColor} />
+        <Tooltip contentStyle={tooltipStyle} />
         <Line
           type="monotone"
           dataKey="value"
-          stroke="#8884d8"
+          stroke={lineColor}
           strokeWidth={2}
           dot={false}
         />

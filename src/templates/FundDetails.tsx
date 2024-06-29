@@ -1,4 +1,9 @@
+'use client';
+
+import { Switch } from '@radix-ui/react-switch';
+import { Moon, Sun } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import { useState } from 'react';
 
 import { KeyFacts } from '@/components/KeyFacts';
 import { Card } from '@/components/ui/card';
@@ -31,6 +36,7 @@ function FundInfoCard({
 }
 
 export function FundDetails() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
   return (
     <div className="space-y-4">
       <Card className="p-6">
@@ -87,8 +93,19 @@ export function FundDetails() {
       </div>
       <Card>
         <div className="p-4">
-          <h2 className="mb-4 text-xl font-semibold">Performance</h2>
-          <PerformanceChart />
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-xl font-semibold">Performance</h2>
+            <div className="flex items-center space-x-2">
+              <Sun className="size-4" />
+              <Switch
+                checked={isDarkMode}
+                onCheckedChange={setIsDarkMode}
+                aria-label="Toggle dark mode"
+              />
+              <Moon className="size-4" />
+            </div>
+          </div>
+          <PerformanceChart isDarkMode={isDarkMode} />
         </div>
       </Card>
       <KeyFacts />
