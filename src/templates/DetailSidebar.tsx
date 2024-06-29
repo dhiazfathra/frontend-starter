@@ -7,7 +7,9 @@ const DetailSidebar: React.FC = () => {
 
   return (
     <div
-      className={`bg-white shadow-md transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-80'}`}
+      className={`bg-white shadow-md transition-all duration-300 ${
+        isCollapsed ? 'w-16' : 'w-full md:w-80'
+      }`}
     >
       <div className="flex items-center justify-between p-4">
         <button

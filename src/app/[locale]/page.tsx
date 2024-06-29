@@ -6,7 +6,7 @@ import Sidebar from '@/templates/Sidebar';
 
 const GBSPage: React.FC = () => {
   return (
-    <div className="flex">
+    <div className="flex flex-col md:flex-row">
       <Sidebar />
       <div className="flex flex-1 flex-col">
         <div className="container mx-auto p-4">
@@ -27,8 +27,8 @@ const GBSPage: React.FC = () => {
               </li>
             </ul>
           </div>
-          <div className="flex">
-            <div className="flex-1">
+          <div className="flex flex-col md:flex-row">
+            <div className="mb-4 flex-1 md:mb-0 md:mr-4">
               <FundDetails />
             </div>
             <DetailSidebar />
