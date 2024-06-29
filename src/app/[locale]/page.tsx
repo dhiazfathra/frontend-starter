@@ -13,17 +13,23 @@ const GBSPage: React.FC = () => {
           <div className="breadcrumbs pb-4 text-sm">
             <ul className="flex items-center space-x-2">
               <li>
-                <a href="/" className="text-gray-700 hover:text-blue-500">
+                <button
+                  onClick={() => (window.location.href = '/')}
+                  className="text-gray-700 hover:text-blue-500"
+                >
                   Screener
-                </a>
+                </button>
               </li>
               <li className="text-gray-500">
                 <span>&gt;</span>
               </li>
               <li>
-                <a href="/" className="text-gray-700 hover:text-blue-500">
+                <button
+                  onClick={() => (window.location.href = '/')}
+                  className="text-gray-700 hover:text-blue-500"
+                >
                   GBS
-                </a>
+                </button>
               </li>
             </ul>
           </div>

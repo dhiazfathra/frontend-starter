@@ -1,18 +1,19 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const DetailSidebar: React.FC = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <div
-      className={`bg-white shadow-md transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-80'}`}
+      className={`bg-gray-200 shadow-md transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-80'}`}
     >
       <div className="flex items-center justify-between p-4">
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
           className="text-gray-500 hover:text-gray-700"
+          type="button"
         >
           {isCollapsed ? '⬅️' : '➡️'}
         </button>
@@ -20,13 +21,22 @@ const DetailSidebar: React.FC = () => {
       {!isCollapsed && (
         <div className="p-4">
           <div className="mb-4 flex justify-between">
-            <button className="rounded bg-blue-500 px-4 py-2 text-white">
+            <button
+              className="rounded bg-gray-300 px-4 py-2 text-gray-700"
+              type="button"
+            >
               Subscribe
             </button>
-            <button className="rounded border border-blue-500 px-4 py-2 text-blue-500">
+            <button
+              className="rounded border border-gray-400 px-4 py-2 text-gray-700"
+              type="button"
+            >
               Redeem
             </button>
-            <button className="rounded border border-blue-500 px-4 py-2 text-blue-500">
+            <button
+              className="rounded border border-gray-400 px-4 py-2 text-gray-700"
+              type="button"
+            >
               Switch
             </button>
           </div>
@@ -82,7 +92,10 @@ const DetailSidebar: React.FC = () => {
             </div>
           </div>
 
-          <button className="w-full rounded bg-green-500 py-2 text-white">
+          <button
+            className="w-full rounded bg-gray-300 py-2 text-gray-700"
+            type="button"
+          >
             Subscribe 1,000 USDC
           </button>
         </div>
