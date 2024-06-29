@@ -7,9 +7,11 @@ const DetailSidebar: React.FC = () => {
 
   return (
     <div
-      className={`bg-white shadow-md transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-80'}`}
+      className={`fixed inset-y-0 right-0 z-30 bg-white shadow-md transition-all duration-300 ${
+        isCollapsed ? 'translate-x-full' : 'translate-x-0'
+      } md:relative md:translate-x-0 ${isCollapsed ? 'w-0 md:w-16' : 'w-full md:w-80'}`}
     >
-      <div className="flex items-center justify-between p-4">
+      <div className="flex h-16 items-center justify-between p-4">
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
           className="text-gray-500 hover:text-gray-700"
