@@ -22,7 +22,7 @@ test.describe('Sanity', () => {
 
       await expect(
         page.getByText(
-          'The perfect Frontend Template to build and scale your business with ease.',
+          'The GLAM Investment Fund seeks to reflect generally the performance of Bitcoin and Solana.',
         ),
       ).toBeVisible();
     });
