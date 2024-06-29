@@ -1,4 +1,3 @@
-// pages/GBSPage.tsx
 import React from 'react';
 
 import DetailSidebar from '@/templates/DetailSidebar';
