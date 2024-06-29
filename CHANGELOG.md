@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/dhiazfathra/frontend-starter/compare/v1.5.0...v1.6.0) (2024-06-29)
+
+
+### Features
+
+* implement collapsible sidebar ([27fefc0](https://github.com/dhiazfathra/frontend-starter/commit/27fefc0837987f55c7c9008f0a61495dab3f2a10))
+
 # [1.5.0](https://github.com/dhiazfathra/frontend-starter/compare/v1.4.0...v1.5.0) (2024-06-29)
 
 
