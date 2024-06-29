@@ -21,21 +21,21 @@ function generateGbsData(startDate: Date, endDate: Date): GbsData[] {
     (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24),
   );
 
-  for (let i: number = 0; i <= days; i++) {
+  for (let i: number = 0; i <= days; i += 1) {
     const currentDate: Date = new Date(startDate);
     currentDate.setDate(startDate.getDate() + i);
 
     const value: number = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;
 
     data.push({
-      date: currentDate.toISOString().split('T')[0],
+      date: currentDate.toISOString().split('T')[0] ?? '',
       value,
     });
   }
 
-  if (data.length > 0) {
-    data[0].value = 100;
-    data[data.length - 1].value = 1000;
+  if (data && data.length > 0) {
+    data[0]!.value = 100;
+    data[data.length - 1]!.value = 1000;
   }
 
   return data;

@@ -44,82 +44,83 @@ export function FundDetails() {
 
   // @ts-expect-error Uncomment the following function and the Switch component when implementing dark mode
   const toggleDarkMode = () => {
-    setIsDarkMode((prevMode) => !prevMode); // Update state directly in the toggle function
+    setIsDarkMode((prevMode) => !prevMode);
   };
 
   return (
     <div className={`space-y-4 ${isDarkMode ? 'dark' : ''}`}>
-      <Card className="p-6">
-        <div className="flex items-center space-x-4">
-          <div className="size-16 rounded-lg bg-gradient-to-br from-gray-700 to-black" />
-          <div>
-            <h1 className="text-2xl font-bold">GLAM Investment Fund</h1>
-            <p className="text-gray-500">
-              The GLAM Investment Fund seeks to reflect generally the
-              performance of Bitcoin and Solana.
-            </p>
-          </div>
-        </div>
-        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          <FundInfoCard title="Symbol" value="GBS" subtitle="Cex: JKL" />
-          <FundInfoCard
-            title="Share Class Asset"
-            value="USDC"
-            subtitle="EFI: TLM"
-          />
-          <FundInfoCard
-            title="Fees"
-            value={
+      <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
+          <Card className="grow p-6">
+            <div className="flex items-center space-x-4">
+              <div className="size-16 rounded-lg bg-gradient-to-br from-gray-700 to-black" />
               <div>
-                <div>Management: 1.5%</div>
-                <div>Performance: 10%</div>
+                <h1 className="text-2xl font-bold">GLAM Investment Fund</h1>
+                <p className="text-gray-500">
+                  The GLAM Investment Fund seeks to reflect generally the
+                  performance of Bitcoin and Solana.
+                </p>
               </div>
-            }
-          />
-          <FundInfoCard
-            title="Fees"
-            value={
-              <div>
-                <div>Subscription: 0%</div>
-                <div>Redemption: 0%</div>
-              </div>
-            }
-          />
-        </div>
-      </Card>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <Card className="p-6">
-          <h2 className="mb-2 text-xl font-semibold">NAV</h2>
-          <div className="text-3xl font-bold">100.00</div>
-          <div className="text-sm text-gray-500">1 Day NAV Change</div>
-          <div className="text-green-500">↑ 1.00 (1.00%)</div>
-        </Card>
-        <Card className="p-6">
-          <h2 className="mb-2 text-xl font-semibold">AUM</h2>
-          <div className="text-3xl font-bold">21.0M</div>
-          <div className="text-sm text-gray-500">1 Day AUM Change</div>
-          <div className="text-red-500">↓ 1M (0.42%)</div>
-        </Card>
-      </div>
-      <Card>
-        <div className="p-4">
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-xl font-semibold">Performance</h2>
-            <div className="flex items-center space-x-2">
-              {/* Uncomment the following lines when implementing dark mode toggle */}
-              {/* <Sun className="size-4" />
-              <Switch
-                checked={isDarkMode}
-                onCheckedChange={toggleDarkMode}
-                aria-label="Toggle dark mode"
-              />
-              <Moon className="size-4" /> */}
             </div>
+            <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
+              <FundInfoCard title="Symbol" value="GBS" subtitle="Cex: JKL" />
+              <FundInfoCard
+                title="Share Class Asset"
+                value="USDC"
+                subtitle="EFI: TLM"
+              />
+              <FundInfoCard
+                title="Fees"
+                value={
+                  <div>
+                    <div>Management: 1.5%</div>
+                    <div>Performance: 10%</div>
+                    <div>Subscription: 0%</div>
+                    <div>Redemption: 0%</div>
+                  </div>
+                }
+              />
+            </div>
+          </Card>
+          <div className="flex flex-col space-y-4 md:w-1/3">
+            <Card className="p-6">
+              <h2 className="mb-2 text-xl font-semibold">NAV</h2>
+              <div className="text-3xl font-bold">100.00</div>
+              <div className="text-sm text-gray-500">1 Day NAV Change</div>
+              <div className="text-green-500">↑ 1.00 (1.00%)</div>
+            </Card>
+            <Card className="p-6">
+              <h2 className="mb-2 text-xl font-semibold">AUM</h2>
+              <div className="text-3xl font-bold">21.0M</div>
+              <div className="text-sm text-gray-500">1 Day AUM Change</div>
+              <div className="text-red-500">↓ 1M (0.42%)</div>
+            </Card>
           </div>
-          <PerformanceChart isDarkMode={isDarkMode} />
         </div>
-      </Card>
-      <KeyFacts />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <Card>
+            <div className="p-4">
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-xl font-semibold">Performance</h2>
+                <div className="flex items-center space-x-2">
+                  {/* Uncomment the following lines when implementing dark mode toggle */}
+                  {/* <Sun className="size-4" />
+                  <Switch
+                    checked={isDarkMode}
+                    onCheckedChange={toggleDarkMode}
+                    aria-label="Toggle dark mode"
+                  />
+                  <Moon className="size-4" /> */}
+                </div>
+              </div>
+              <PerformanceChart isDarkMode={isDarkMode} />
+            </div>
+          </Card>
+          <Card>
+            <KeyFacts />
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }
