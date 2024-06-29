@@ -1,7 +1,5 @@
 'use client';
 
-import { Switch } from '@radix-ui/react-switch';
-import { Moon, Sun } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
@@ -107,13 +105,13 @@ export function FundDetails() {
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-xl font-semibold">Performance</h2>
             <div className="flex items-center space-x-2">
-              <Sun className="size-4" />
+              {/* <Sun className="size-4" />
               <Switch
                 checked={isDarkMode}
                 onCheckedChange={toggleDarkMode}
                 aria-label="Toggle dark mode"
               />
-              <Moon className="size-4" />
+              <Moon className="size-4" /> */}
             </div>
           </div>
           <PerformanceChart isDarkMode={isDarkMode} />
