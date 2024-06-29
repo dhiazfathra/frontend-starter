@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/dhiazfathra/frontend-starter/compare/v1.0.0...v1.1.0) (2024-06-29)
+
+
+### Features
+
+* implement breadcrumb ([65ed4cb](https://github.com/dhiazfathra/frontend-starter/commit/65ed4cb799875890a5b517bfe5052075c782e2cf))
+
 # 1.0.0 (2024-06-29)
 
 
