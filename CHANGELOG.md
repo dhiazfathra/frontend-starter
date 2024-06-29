@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/dhiazfathra/frontend-starter/compare/v1.1.0...v1.2.0) (2024-06-29)
+
+
+### Features
+
+* implement csr in chart ([2da8090](https://github.com/dhiazfathra/frontend-starter/commit/2da8090639c33a747909db7f450cc90369a12d7e))
+
 # [1.1.0](https://github.com/dhiazfathra/frontend-starter/compare/v1.0.0...v1.1.0) (2024-06-29)
 
 
