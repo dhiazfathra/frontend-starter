@@ -3,13 +3,18 @@
 import React from 'react';
 
 const Breadcrumbs: React.FC = () => {
+  const handleClick = (path: string) => {
+    window.location.href = path;
+  };
+
   return (
     <div className="breadcrumbs pb-4 text-sm">
       <ul className="flex items-center space-x-2">
         <li>
           <button
-            onClick={() => (window.location.href = '/')}
+            onClick={() => handleClick('/')}
             className="text-gray-700 hover:text-blue-500"
+            type="button"
           >
             Screener
           </button>
@@ -19,8 +24,9 @@ const Breadcrumbs: React.FC = () => {
         </li>
         <li>
           <button
-            onClick={() => (window.location.href = '/')}
+            onClick={() => handleClick('/')}
             className="text-gray-700 hover:text-blue-500"
+            type="button"
           >
             GBS
           </button>
