@@ -42,6 +42,7 @@ function FundInfoCard({
 export function FundDetails() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
+  // eslint-disable-next-line unused-imports/no-unused-vars
   const toggleDarkMode = () => {
     setIsDarkMode((prevMode) => !prevMode);
   };
