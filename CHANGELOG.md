@@ -1,3 +1,18 @@
+# [1.3.0](https://github.com/dhiazfathra/frontend-starter/compare/v1.2.0...v1.3.0) (2024-06-29)
+
+
+### Features
+
+* add switch ([4074717](https://github.com/dhiazfathra/frontend-starter/commit/4074717625bc3da42d6c949c5e3e76c806a01a1e))
+* implement chart dark mode ([2bd8562](https://github.com/dhiazfathra/frontend-starter/commit/2bd8562693f8ac5a58f3c086ac01ae9cea3cc046))
+* implement full dark mode ([23dc2cd](https://github.com/dhiazfathra/frontend-starter/commit/23dc2cd813eee9b0fe29a9ba892b8a657878b522))
+
+
+### Reverts
+
+* remove switch ([ed28d50](https://github.com/dhiazfathra/frontend-starter/commit/ed28d509211c5de69f4fd51bf9cc3229200de816))
+* turn off dark mode feature ([024ff33](https://github.com/dhiazfathra/frontend-starter/commit/024ff3357ae359b86e37000a4a1b93b7691b8e62))
+
 # [1.2.0](https://github.com/dhiazfathra/frontend-starter/compare/v1.1.0...v1.2.0) (2024-06-29)
 
 
