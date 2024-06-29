@@ -1,18 +1,20 @@
 import React from 'react';
 
-import { Footer } from '../../templates/Footer';
-import { FundDetails } from '../../templates/FundDetails';
-import { Hero } from '../../templates/Hero';
-import { Navbar } from '../../templates/Navbar';
+import { Footer } from '@/templates/Footer';
+import { FundDetails } from '@/templates/FundDetails';
+import { Hero } from '@/templates/Hero';
+import { Navbar } from '@/templates/Navbar';
 
 const App: React.FC = () => {
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <Navbar />
-      <Hero />
+      <main className="grow">
+        <Hero />
+        <FundDetails />
+      </main>
       <Footer />
-      <FundDetails />
-    </>
+    </div>
   );
 };
 
