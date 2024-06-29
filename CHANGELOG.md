@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/dhiazfathra/frontend-starter/compare/v1.4.0...v1.5.0) (2024-06-29)
+
+
+### Features
+
+* add details right sidebar ([3912e5e](https://github.com/dhiazfathra/frontend-starter/commit/3912e5e06e0c4aaa44ba16f4b018b6a540acd3fa))
+
 # [1.4.0](https://github.com/dhiazfathra/frontend-starter/compare/v1.3.0...v1.4.0) (2024-06-29)
 
 
