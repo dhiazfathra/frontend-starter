@@ -1,6 +1,10 @@
-import { AppConfig } from '@/utils/AppConfig';
+import React from 'react';
 
-const Logo = () => (
+const AppConfig = {
+  name: 'GLAM Investment Fund',
+};
+
+export const Logo: React.FC = () => (
   <div className="flex items-center text-xl font-semibold">
     <svg
       className="mr-1 size-8 stroke-current stroke-2"
@@ -19,5 +23,3 @@ const Logo = () => (
     {AppConfig.name}
   </div>
 );
-
-export { Logo };
