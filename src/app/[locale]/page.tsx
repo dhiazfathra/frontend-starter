@@ -1,21 +1,15 @@
-import React from 'react';
-
-import { Footer } from '@/templates/Footer';
 import { FundDetails } from '@/templates/FundDetails';
-import { Hero } from '@/templates/Hero';
-import { Navbar } from '@/templates/Navbar';
 
-const App: React.FC = () => {
+export default function GBSPage() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <Navbar />
-      <main className="grow">
-        <Hero />
-        <FundDetails />
-      </main>
-      <Footer />
+    <div className="container mx-auto p-4">
+      <div className="breadcrumbs text-sm">
+        <ul>
+          <li>Screener</li>
+          <li>GBS</li>
+        </ul>
+      </div>
+      <FundDetails />
     </div>
   );
-};
-
-export default App;
+}

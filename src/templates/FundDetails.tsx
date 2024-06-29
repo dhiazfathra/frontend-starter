@@ -1,50 +1,87 @@
-import React from 'react';
+import { KeyFacts } from '@/components/KeyFacts';
+import { PerformanceChart } from '@/components/PerformanceChart';
+import { Card } from '@/components/ui/card';
 
-export const FundDetails: React.FC = () => {
+function FundInfoCard({
+  title,
+  value,
+  subtitle,
+}: {
+  title: string;
+  value: React.ReactNode;
+  subtitle?: string;
+}) {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="rounded-lg bg-white p-6 shadow-md">
-        <h2 className="mb-4 text-2xl font-bold">GLAM Investment Fund</h2>
-        <p className="mb-6 text-gray-600">
-          The GLAM Investment Fund seeks to reflect generally the performance of
-          Bitcoin and Solana.
-        </p>
-
-        <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
-          <div>
-            <h3 className="text-lg font-semibold">NAV</h3>
-            <p className="text-3xl font-bold">100.00</p>
-            <p className="text-green-500">1.00 (1.00%)</p>
-            <p className="text-sm text-gray-500">1 Day NAV Change</p>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold">AUM</h3>
-            <p className="text-3xl font-bold">21.0M</p>
-            <p className="text-red-500">1M (0.42%)</p>
-            <p className="text-sm text-gray-500">1 Day AUM Change</p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <h3 className="font-semibold">Symbol</h3>
-            <p>GBS</p>
-          </div>
-          <div>
-            <h3 className="font-semibold">Share Class Asset</h3>
-            <p>USDC</p>
-          </div>
-          <div>
-            <h3 className="font-semibold">Management Fee</h3>
-            <p>1.5%</p>
-          </div>
-          <div>
-            <h3 className="font-semibold">Performance Fee</h3>
-            <p>10%</p>
-          </div>
-        </div>
-      </div>
+    <div className="rounded-lg bg-gray-100 p-4">
+      <h3 className="text-sm font-medium text-gray-500">{title}</h3>
+      <div className="text-lg font-semibold">{value}</div>
+      {subtitle && <div className="text-xs text-gray-400">{subtitle}</div>}
     </div>
   );
-};
+}
+
+export function FundDetails() {
+  return (
+    <div className="space-y-4">
+      <Card className="p-6">
+        <div className="flex items-center space-x-4">
+          <div className="size-16 rounded-lg bg-gradient-to-br from-gray-700 to-black" />
+          <div>
+            <h1 className="text-2xl font-bold">GLAM Investment Fund</h1>
+            <p className="text-gray-500">
+              The GLAM Investment Fund seeks to reflect generally the
+              performance of Bitcoin and Solana.
+            </p>
+          </div>
+        </div>
+        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <FundInfoCard title="Symbol" value="GBS" subtitle="Cex: JKL" />
+          <FundInfoCard
+            title="Share Class Asset"
+            value="USDC"
+            subtitle="EFI: TLM"
+          />
+          <FundInfoCard
+            title="Fees"
+            value={
+              <div>
+                <div>Management: 1.5%</div>
+                <div>Performance: 10%</div>
+              </div>
+            }
+          />
+          <FundInfoCard
+            title="Fees"
+            value={
+              <div>
+                <div>Subscription: 0%</div>
+                <div>Redemption: 0%</div>
+              </div>
+            }
+          />
+        </div>
+      </Card>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <Card className="p-6">
+          <h2 className="mb-2 text-xl font-semibold">NAV</h2>
+          <div className="text-3xl font-bold">100.00</div>
+          <div className="text-sm text-gray-500">1 Day NAV Change</div>
+          <div className="text-green-500">↑ 1.00 (1.00%)</div>
+        </Card>
+        <Card className="p-6">
+          <h2 className="mb-2 text-xl font-semibold">AUM</h2>
+          <div className="text-3xl font-bold">21.0M</div>
+          <div className="text-sm text-gray-500">1 Day AUM Change</div>
+          <div className="text-red-500">↓ 1M (0.42%)</div>
+        </Card>
+      </div>
+      <Card>
+        <div className="p-4">
+          <h2 className="mb-4 text-xl font-semibold">Performance</h2>
+          <PerformanceChart />
+        </div>
+      </Card>
+      <KeyFacts />
+    </div>
+  );
+}
