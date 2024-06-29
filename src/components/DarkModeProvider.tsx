@@ -1,6 +1,23 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+
+interface DarkModeContextType {
+  isDarkMode: boolean;
+  toggleDarkMode: () => void;
+}
+
+const DarkModeContext = createContext<DarkModeContextType | undefined>(
+  undefined,
+);
+
+export function useDarkMode() {
+  const context = useContext(DarkModeContext);
+  if (context === undefined) {
+    throw new Error('useDarkMode must be used within a DarkModeProvider');
+  }
+  return context;
+}
 
 export default function DarkModeProvider({
   children,
@@ -24,5 +41,23 @@ export default function DarkModeProvider({
     }
   }, []);
 
-  return <div className={isDarkMode ? 'dark' : ''}>{children}</div>;
+  const toggleDarkMode = () => {
+    setIsDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      if (newMode) {
+        localStorage.theme = 'dark';
+        document.documentElement.classList.add('dark');
+      } else {
+        localStorage.theme = 'light';
+        document.documentElement.classList.remove('dark');
+      }
+      return newMode;
+    });
+  };
+
+  return (
+    <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
+      <div className={isDarkMode ? 'dark' : ''}>{children}</div>
+    </DarkModeContext.Provider>
+  );
 }
