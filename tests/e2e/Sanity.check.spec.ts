@@ -7,7 +7,7 @@ import { expect, test } from '@playwright/test';
 // On the other hand, E2E tests ending with `*.spec.ts` are only run before deployment.
 // You can run them locally or on CI to ensure that the application is ready for deployment.
 
-const targetUrl = process.env.ENVIRONMENT_URL || process.env.PRODUCTION_URL;
+const targetUrl = process.env.ENVIRONMENT_URL ?? process.env.PRODUCTION_URL;
 
 if (!targetUrl) {
   throw new Error(
