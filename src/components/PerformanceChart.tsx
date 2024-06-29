@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import {
   Line,
   LineChart,
@@ -17,6 +20,16 @@ const data = [
 ];
 
 export function PerformanceChart() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null; // or a loading placeholder
+  }
+
   return (
     <ResponsiveContainer width="100%" height={300}>
       <LineChart data={data}>
