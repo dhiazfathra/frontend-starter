@@ -1,6 +1,16 @@
+import dynamic from 'next/dynamic';
+
 import { KeyFacts } from '@/components/KeyFacts';
-import { PerformanceChart } from '@/components/PerformanceChart';
 import { Card } from '@/components/ui/card';
+
+const PerformanceChart = dynamic(
+  () =>
+    import('@/components/PerformanceChart').then((mod) => mod.PerformanceChart),
+  {
+    ssr: false,
+    loading: () => <p>Loading chart...</p>,
+  },
+);
 
 function FundInfoCard({
   title,
