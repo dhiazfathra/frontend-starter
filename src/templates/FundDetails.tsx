@@ -1,5 +1,6 @@
 'use client';
 
+import { ChevronDown, ChevronUp } from 'lucide-react'; // Make sure to import these icons
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
@@ -41,10 +42,14 @@ function FundInfoCard({
 
 export function FundDetails() {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [openSection, setOpenSection] = useState<string | null>('overview');
 
-  // @ts-expect-error Uncomment the following function and the Switch component when implementing dark mode
+  const toggleSection = (section: string) => {
+    setOpenSection(openSection === section ? null : section);
+  };
+
   const toggleDarkMode = () => {
-    setIsDarkMode((prevMode) => !prevMode); // Update state directly in the toggle function
+    setIsDarkMode((prevMode) => !prevMode);
   };
 
   return (
@@ -60,33 +65,44 @@ export function FundDetails() {
             </p>
           </div>
         </div>
-        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          <FundInfoCard title="Symbol" value="GBS" subtitle="Cex: JKL" />
-          <FundInfoCard
-            title="Share Class Asset"
-            value="USDC"
-            subtitle="EFI: TLM"
-          />
-          <FundInfoCard
-            title="Fees"
-            value={
-              <div>
-                <div>Management: 1.5%</div>
-                <div>Performance: 10%</div>
-              </div>
-            }
-          />
-          <FundInfoCard
-            title="Fees"
-            value={
-              <div>
-                <div>Subscription: 0%</div>
-                <div>Redemption: 0%</div>
-              </div>
-            }
-          />
-        </div>
+
+        <button
+          onClick={() => toggleSection('overview')}
+          className="mt-4 flex w-full items-center justify-between rounded-md bg-gray-100 p-2"
+        >
+          <span className="font-semibold">Overview</span>
+          {openSection === 'overview' ? <ChevronUp /> : <ChevronDown />}
+        </button>
+        {openSection === 'overview' && (
+          <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <FundInfoCard title="Symbol" value="GBS" subtitle="Cex: JKL" />
+            <FundInfoCard
+              title="Share Class Asset"
+              value="USDC"
+              subtitle="EFI: TLM"
+            />
+            <FundInfoCard
+              title="Fees"
+              value={
+                <div>
+                  <div>Management: 1.5%</div>
+                  <div>Performance: 10%</div>
+                </div>
+              }
+            />
+            <FundInfoCard
+              title="Fees"
+              value={
+                <div>
+                  <div>Subscription: 0%</div>
+                  <div>Redemption: 0%</div>
+                </div>
+              }
+            />
+          </div>
+        )}
       </Card>
+
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <Card className="p-6">
           <h2 className="mb-2 text-xl font-semibold">NAV</h2>
@@ -101,25 +117,41 @@ export function FundDetails() {
           <div className="text-red-500">↓ 1M (0.42%)</div>
         </Card>
       </div>
+
       <Card>
-        <div className="p-4">
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-xl font-semibold">Performance</h2>
-            <div className="flex items-center space-x-2">
-              {/* Uncomment the following lines when implementing dark mode toggle */}
-              {/* <Sun className="size-4" />
-              <Switch
-                checked={isDarkMode}
-                onCheckedChange={toggleDarkMode}
-                aria-label="Toggle dark mode"
-              />
-              <Moon className="size-4" /> */}
+        <button
+          onClick={() => toggleSection('performance')}
+          className="flex w-full items-center justify-between rounded-t-md bg-gray-100 p-4"
+        >
+          <span className="font-semibold">Performance</span>
+          {openSection === 'performance' ? <ChevronUp /> : <ChevronDown />}
+        </button>
+        {openSection === 'performance' && (
+          <div className="p-4">
+            <div className="mb-4 flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                {/* Dark mode toggle implementation here */}
+              </div>
             </div>
+            <PerformanceChart isDarkMode={isDarkMode} />
           </div>
-          <PerformanceChart isDarkMode={isDarkMode} />
-        </div>
+        )}
       </Card>
-      <KeyFacts />
+
+      <Card>
+        <button
+          onClick={() => toggleSection('keyFacts')}
+          className="flex w-full items-center justify-between rounded-t-md bg-gray-100 p-4"
+        >
+          <span className="font-semibold">Key Facts</span>
+          {openSection === 'keyFacts' ? <ChevronUp /> : <ChevronDown />}
+        </button>
+        {openSection === 'keyFacts' && (
+          <div className="p-4">
+            <KeyFacts />
+          </div>
+        )}
+      </Card>
     </div>
   );
 }
