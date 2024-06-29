@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/dhiazfathra/frontend-starter/compare/v1.6.0...v1.7.0) (2024-06-29)
+
+
+### Features
+
+* implement data algorithm ([8bd4e5e](https://github.com/dhiazfathra/frontend-starter/commit/8bd4e5e103b83f27bc6a8e7ea2b5859423e8763b))
+
 # [1.6.0](https://github.com/dhiazfathra/frontend-starter/compare/v1.5.0...v1.6.0) (2024-06-29)
 
 
