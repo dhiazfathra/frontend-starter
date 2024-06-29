@@ -7,6 +7,12 @@ const DetailSidebar: React.FC = () => {
   const [activeTab, setActiveTab] = useState('Subscribe');
   const [activeAsset, setActiveAsset] = useState('In-kind');
 
+  const buttonStyle = (isActive) => `
+    flex-1 py-2 text-sm
+    ${isActive ? 'bg-white text-gray-800 font-semibold' : 'bg-gray-100 text-gray-600'}
+    border-2 ${isActive ? 'border-gray-300' : 'border-transparent'}
+  `;
+
   return (
     <div
       className={`bg-white shadow-md transition-all duration-300 ${
@@ -28,13 +34,7 @@ const DetailSidebar: React.FC = () => {
             {['Subscribe', 'Redeem', 'Switch'].map((tab) => (
               <button
                 key={tab}
-                className={`flex-1 py-2 text-sm ${
-                  activeTab === tab
-                    ? 'bg-white font-semibold text-gray-800'
-                    : 'bg-gray-100 text-gray-600'
-                } border-b-2 ${
-                  activeTab === tab ? 'border-gray-800' : 'border-transparent'
-                }`}
+                className={buttonStyle(activeTab === tab)}
                 onClick={() => setActiveTab(tab)}
                 type="button"
               >
@@ -49,15 +49,7 @@ const DetailSidebar: React.FC = () => {
               {['In-kind', 'USDC'].map((asset) => (
                 <button
                   key={asset}
-                  className={`flex-1 py-2 text-sm ${
-                    activeAsset === asset
-                      ? 'bg-white font-semibold text-gray-800'
-                      : 'bg-gray-100 text-gray-600'
-                  } border-b-2 ${
-                    activeAsset === asset
-                      ? 'border-gray-800'
-                      : 'border-transparent'
-                  }`}
+                  className={buttonStyle(activeAsset === asset)}
                   onClick={() => setActiveAsset(asset)}
                   type="button"
                 >
