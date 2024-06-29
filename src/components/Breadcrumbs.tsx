@@ -8,7 +8,7 @@ const Breadcrumbs: React.FC = () => {
   };
 
   return (
-    <div className="breadcrumbs pb-4 text-sm">
+    <div className="pb-4 text-sm">
       <ul className="flex items-center space-x-2">
         <li>
           <button
