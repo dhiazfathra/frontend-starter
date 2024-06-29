@@ -7,7 +7,7 @@ const DetailSidebar: React.FC = () => {
   const [activeTab, setActiveTab] = useState('Subscribe');
   const [activeAsset, setActiveAsset] = useState('In-kind');
 
-  const buttonStyle = (isActive) => `
+  const buttonStyle = (isActive: boolean) => `
     flex-1 py-2 text-sm
     ${isActive ? 'bg-white text-gray-800 font-semibold' : 'bg-gray-100 text-gray-600'}
     border-2 ${isActive ? 'border-gray-300' : 'border-transparent'}
