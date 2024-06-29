@@ -42,9 +42,9 @@ function FundInfoCard({
 export function FundDetails() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // eslint-disable-next-line unused-imports/no-unused-vars
+  // @ts-expect-error Uncomment the following function and the Switch component when implementing dark mode
   const toggleDarkMode = () => {
-    setIsDarkMode((prevMode) => !prevMode);
+    setIsDarkMode((prevMode) => !prevMode); // Update state directly in the toggle function
   };
 
   return (
@@ -106,7 +106,7 @@ export function FundDetails() {
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-xl font-semibold">Performance</h2>
             <div className="flex items-center space-x-2">
-              {/* FIXME: Fix dark mode state */}
+              {/* Uncomment the following lines when implementing dark mode toggle */}
               {/* <Sun className="size-4" />
               <Switch
                 checked={isDarkMode}
