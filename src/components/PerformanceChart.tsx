@@ -62,7 +62,7 @@ export function PerformanceChart({ isDarkMode }: PerformanceChartProps) {
   }
 
   const textColor = isDarkMode ? '#ffffff' : '#000000';
-  const lineColor = isDarkMode ? '#8884d8' : '#82ca9d';
+  const lineColor = isDarkMode ? '#4287f5' : '#1e90ff'; // Changed to blue
   const tooltipStyle = {
     backgroundColor: isDarkMode ? '#333' : '#fff',
     border: 'none',
