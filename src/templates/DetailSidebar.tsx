@@ -15,7 +15,7 @@ const DetailSidebar: React.FC = () => {
 
   return (
     <div
-      className={`bg-white shadow-md transition-all duration-300 ${
+      className={`bg-gray-200 shadow-md transition-all duration-300 ${
         isCollapsed ? 'w-16' : 'w-80'
       }`}
     >
