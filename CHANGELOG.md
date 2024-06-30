@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/dhiazfathra/frontend-starter/compare/v1.7.0...v1.8.0) (2024-06-30)
+
+
+### Features
+
+* add clear button in right detail sidebar ([87b7d7f](https://github.com/dhiazfathra/frontend-starter/commit/87b7d7f697e9db0d363d66cbb7f2c551a8e354e7))
+
 # [1.7.0](https://github.com/dhiazfathra/frontend-starter/compare/v1.6.0...v1.7.0) (2024-06-29)
 
 
