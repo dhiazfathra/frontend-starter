@@ -28,21 +28,26 @@ async function fetchUsdcData(
     'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
   );
 
-  const days: number = Math.floor(
-    (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24),
-  );
-
-  const fetchPromises = Array.from({ length: days + 1 }, (_, i) => {
-    const currentDate = new Date(startDate);
-    currentDate.setDate(startDate.getDate() + i);
-    return connection.getTokenSupply(usdcMint).then((supply) => ({
-      date: currentDate.toISOString().split('T')[0] ?? '',
-      value: parseFloat(supply.value.uiAmount?.toFixed(2) ?? '0'),
-    }));
-  });
-
   try {
-    const data = await Promise.all(fetchPromises);
+    const supply = await connection.getTokenSupply(usdcMint);
+    const currentValue = parseFloat(supply.value.uiAmount?.toFixed(2) ?? '0');
+
+    const days: number = Math.floor(
+      (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24),
+    );
+
+    // Generate mock data based on the current value
+    const data: UsdcData[] = Array.from({ length: days + 1 }, (_, i) => {
+      const currentDate = new Date(startDate);
+      currentDate.setDate(startDate.getDate() + i);
+      // Add some random variation to create a trend
+      const randomVariation = (Math.random() - 0.5) * 0.01 * currentValue;
+      return {
+        date: currentDate.toISOString().split('T')[0] ?? '',
+        value: currentValue + randomVariation,
+      };
+    });
+
     return data;
   } catch (error) {
     console.error('Error fetching USDC data:', error);
@@ -50,8 +55,8 @@ async function fetchUsdcData(
   }
 }
 
-const startDate: Date = new Date('2023-06-01'); // Changed to a past date
-const endDate: Date = new Date('2023-06-30'); // Changed to a past date
+const startDate: Date = new Date('2023-06-01');
+const endDate: Date = new Date('2023-06-30');
 
 interface PerformanceChartProps {
   isDarkMode: boolean;
