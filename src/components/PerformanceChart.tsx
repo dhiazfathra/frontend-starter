@@ -58,11 +58,11 @@ export function PerformanceChart({ isDarkMode }: PerformanceChartProps) {
   }, []);
 
   if (!isMounted) {
-    return null; // or a loading placeholder
+    return null;
   }
 
   const textColor = isDarkMode ? '#ffffff' : '#000000';
-  const lineColor = isDarkMode ? '#4287f5' : '#1e90ff'; // Changed to blue
+  const lineColor = isDarkMode ? '#4287f5' : '#1e90ff';
   const tooltipStyle = {
     backgroundColor: isDarkMode ? '#333' : '#fff',
     border: 'none',
@@ -74,8 +74,12 @@ export function PerformanceChart({ isDarkMode }: PerformanceChartProps) {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <LineChart data={data}>
-        <XAxis dataKey="name" stroke={textColor} />
-        <YAxis domain={['dataMin', 'dataMax']} stroke={textColor} />
+        <XAxis dataKey="name" hide />
+        <YAxis
+          domain={['dataMin', 'dataMax']}
+          stroke={textColor}
+          orientation="right"
+        />
         <Tooltip contentStyle={tooltipStyle} />
         <Line
           type="monotone"
