@@ -11,6 +11,7 @@ export function PerformanceChart() {
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<ReturnType<typeof createChart> | null>(null);
 
+  // FIXME: This is rendered twice and can be optimized
   useEffect(() => {
     const fetchData = async () => {
       try {
