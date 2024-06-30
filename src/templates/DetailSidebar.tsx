@@ -6,7 +6,6 @@ const DetailSidebar: React.FC = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [activeTab, setActiveTab] = useState('Subscribe');
   const [activeAsset, setActiveAsset] = useState('In-kind');
-
   const buttonStyle = (isActive: boolean) => `
     flex-1 py-2 text-sm
     ${isActive ? 'bg-white text-gray-800 font-semibold' : 'bg-gray-100 text-gray-600'}
@@ -42,7 +41,6 @@ const DetailSidebar: React.FC = () => {
               </button>
             ))}
           </div>
-
           <div className="mb-4">
             <p className="mb-2 text-sm text-gray-600">Share Class Asset</p>
             <div className="flex">
@@ -58,7 +56,6 @@ const DetailSidebar: React.FC = () => {
               ))}
             </div>
           </div>
-
           <div className="mb-4">
             <p className="text-sm text-gray-600">Amount</p>
             <input
@@ -67,12 +64,10 @@ const DetailSidebar: React.FC = () => {
               placeholder="0"
             />
           </div>
-
           <div className="mb-4">
             <p className="text-sm text-gray-600">Balance</p>
             <p className="font-semibold">89,901.00</p>
           </div>
-
           <div className="mb-4">
             <h3 className="mb-2 font-semibold">Terms</h3>
             {[
@@ -86,7 +81,6 @@ const DetailSidebar: React.FC = () => {
               </div>
             ))}
           </div>
-
           <div className="mb-4">
             <h3 className="mb-2 font-semibold">Summary</h3>
             {[
@@ -100,13 +94,22 @@ const DetailSidebar: React.FC = () => {
               </div>
             ))}
           </div>
-
-          <button
-            className="w-full rounded bg-green-500 py-2 text-white"
-            type="button"
-          >
-            Subscribe 1,000 USDC
-          </button>
+          <div className="flex gap-2">
+            <button
+              className="grow bg-gray-300 py-2 text-gray-700"
+              style={{ flex: '1' }}
+              type="button"
+            >
+              Clear
+            </button>
+            <button
+              className="grow bg-green-500 py-2 text-white"
+              style={{ flex: '3' }}
+              type="button"
+            >
+              Subscribe 1,000 USDC
+            </button>
+          </div>
         </div>
       )}
     </div>
