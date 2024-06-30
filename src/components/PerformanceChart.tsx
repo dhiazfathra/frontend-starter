@@ -37,8 +37,8 @@ function generateGbsData(startDate: Date, endDate: Date): GbsData[] {
   }
 
   if (data && data.length > 0) {
-    data[0]!.value = 25; // Ensure the first value is 25
-    data[data.length - 1]!.value = 27; // Ensure the last value is 27
+    data[0]!.value = 25.4; // Enforce the first value
+    data[data.length - 1]!.value = 26.3; // Enforce the last value
   }
 
   return data;
