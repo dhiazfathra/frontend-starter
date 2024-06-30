@@ -14,6 +14,7 @@ interface GbsData {
   date: string;
   value: number;
 }
+
 function generateGbsData(startDate: Date, endDate: Date): GbsData[] {
   const data: GbsData[] = [];
   const days: number = Math.floor(
@@ -24,11 +25,11 @@ function generateGbsData(startDate: Date, endDate: Date): GbsData[] {
     const currentDate: Date = new Date(startDate);
     currentDate.setDate(startDate.getDate() + i);
 
-    // Generate a random value between 0 and 1000 (min and max value)
+    // Generate a random value between 0 and 1000
     const randomValue: number = Math.floor(Math.random() * 1001);
 
-    // Apply the projection formula (project 0 to 1000 into 25 to 27)
-    const value: number = 0.002 * randomValue + 25;
+    // Apply the projection formula for the range 25.4 to 26.23
+    const value: number = 0.00083 * randomValue + 25.4;
 
     data.push({
       date: currentDate.toISOString().split('T')[0] ?? '',
@@ -37,8 +38,8 @@ function generateGbsData(startDate: Date, endDate: Date): GbsData[] {
   }
 
   if (data && data.length > 0) {
-    data[0]!.value = 25.4; // Enforce the first value
-    data[data.length - 1]!.value = 26.3; // Enforce the last value
+    data[0]!.value = 25.4; // Ensure the first value is 25.4
+    data[data.length - 1]!.value = 26.23; // Ensure the last value is 26.23
   }
 
   return data;
