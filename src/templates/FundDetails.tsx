@@ -110,8 +110,8 @@ export function FundDetails() {
             </Card>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
-          <Card className="md:col-span-3">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <Card className="md:col-span-2">
             <div className="p-4">
               <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-xl font-semibold">Performance</h2>
