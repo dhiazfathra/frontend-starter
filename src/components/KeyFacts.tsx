@@ -16,6 +16,7 @@ export function KeyFacts() {
       <div className="space-y-4">
         <KeyFactItem title="Share Class Asset" value="USDC" />
         <KeyFactItem title="Inception Date" value="2024-04-01" />
+        <div className="my-8 h-px bg-gray-300" />
         <div className="mt-6">
           <h3 className="mb-2 text-sm font-bold text-gray-500">Accounts</h3>
           <div className="space-y-2">
@@ -24,6 +25,7 @@ export function KeyFacts() {
             <KeyFactItem title="Manager" value="ema1...Ayuo" />
           </div>
         </div>
+        <div className="my-8 h-px bg-gray-300" />
         <div className="mt-6">
           <h3 className="mb-2 text-sm font-bold text-gray-500">Terms</h3>
           <KeyFactItem title="Lock-up Period" value="24 hours" />
