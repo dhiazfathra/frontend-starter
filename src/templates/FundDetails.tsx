@@ -1,7 +1,6 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
 
 import { KeyFacts } from '@/components/KeyFacts';
 import { Card } from '@/components/ui/card';
@@ -40,15 +39,8 @@ function FundInfoCard({
 }
 
 export function FundDetails() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // @ts-expect-error Uncomment the following function and the Switch component when implementing dark mode
-  const toggleDarkMode = () => {
-    setIsDarkMode((prevMode) => !prevMode);
-  };
-
   return (
-    <div className={`space-y-4 ${isDarkMode ? 'dark' : ''}`}>
+    <div className="space-y-4">
       <div className="flex flex-col space-y-4">
         <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
           <Card className="grow p-6">
@@ -115,18 +107,8 @@ export function FundDetails() {
             <div className="p-4">
               <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-xl font-semibold">Performance</h2>
-                <div className="flex items-center space-x-2">
-                  {/* Uncomment the following lines when implementing dark mode toggle */}
-                  {/* <Sun className="size-4" />
-                  <Switch
-                    checked={isDarkMode}
-                    onCheckedChange={toggleDarkMode}
-                    aria-label="Toggle dark mode"
-                  />
-                  <Moon className="size-4" /> */}
-                </div>
               </div>
-              <PerformanceChart isDarkMode={isDarkMode} />
+              <PerformanceChart />
             </div>
           </Card>
           <Card>
