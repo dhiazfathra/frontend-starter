@@ -1,14 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import {
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
+import { Line, LineChart, ResponsiveContainer, Tooltip, YAxis } from 'recharts';
 
 interface GbsData {
   date: string;
@@ -70,8 +63,17 @@ export function PerformanceChart() {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <LineChart data={data} style={{ backgroundColor: '#1a1a1a' }}>
-        <XAxis dataKey="date" stroke={textColor} />
-        <YAxis domain={['dataMin', 'dataMax']} stroke={textColor} />
+        <defs>
+          <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor={lineColor} stopOpacity={0.8} />
+            <stop offset="95%" stopColor={lineColor} stopOpacity={0} />
+          </linearGradient>
+        </defs>
+        <YAxis
+          domain={['dataMin', 'dataMax']}
+          stroke={textColor}
+          orientation="right"
+        />
         <Tooltip contentStyle={tooltipStyle} />
         <Line
           type="linear"
@@ -79,6 +81,7 @@ export function PerformanceChart() {
           stroke={lineColor}
           strokeWidth={2}
           dot={false}
+          fill="url(#colorValue)"
         />
       </LineChart>
     </ResponsiveContainer>
