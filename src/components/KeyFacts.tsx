@@ -17,7 +17,7 @@ export function KeyFacts() {
         <KeyFactItem title="Share Class Asset" value="USDC" />
         <KeyFactItem title="Inception Date" value="2024-04-01" />
         <div className="mt-6">
-          <h3 className="mb-2 text-sm font-medium text-gray-500">Accounts</h3>
+          <h3 className="mb-2 text-sm font-bold text-gray-500">Accounts</h3>
           <div className="space-y-2">
             <KeyFactItem title="Fund" value="AdXk...5Kc2" />
             <KeyFactItem title="Treasury" value="7Eo2...MJrP" />
@@ -25,7 +25,7 @@ export function KeyFacts() {
           </div>
         </div>
         <div className="mt-6">
-          <h3 className="mb-2 text-sm font-medium text-gray-500">Terms</h3>
+          <h3 className="mb-2 text-sm font-bold text-gray-500">Terms</h3>
           <KeyFactItem title="Lock-up Period" value="24 hours" />
         </div>
       </div>
