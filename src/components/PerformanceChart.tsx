@@ -11,6 +11,13 @@ export function PerformanceChart() {
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<ReturnType<typeof createChart> | null>(null);
 
+  const formatDate = (date: Date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
   // FIXME: This is rendered twice and can be optimized
   useEffect(() => {
     const fetchData = async () => {
@@ -42,7 +49,7 @@ export function PerformanceChart() {
           });
 
           lineSeries.setData([
-            { time: new Date().getTime() / 1000, value: balanceInSOL },
+            { time: formatDate(new Date()), value: balanceInSOL },
           ]);
 
           chart.timeScale().fitContent();
