@@ -1,7 +1,7 @@
 'use client';
 
-import { Connection, PublicKey } from '@solana/web3.js';
-import { useEffect, useState } from 'react';
+import { Connection, LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
+import React, { useEffect, useState } from 'react';
 import {
   Line,
   LineChart,
@@ -11,111 +11,41 @@ import {
   YAxis,
 } from 'recharts';
 
-interface UsdcData {
-  date: string;
-  value: number;
-}
-
-// Implement a simple rate limiter
-const rateLimiter = {
-  lastCallTime: 0,
-  callsInLastTenSeconds: 0,
-  async throttle() {
-    const now = Date.now();
-    if (now - this.lastCallTime > 10000) {
-      this.callsInLastTenSeconds = 0;
-      this.lastCallTime = now;
-    }
-    if (this.callsInLastTenSeconds >= 40) {
-      const waitTime = 10000 - (now - this.lastCallTime);
-      await new Promise((resolve) => setTimeout(resolve, waitTime));
-      return this.throttle();
-    }
-    this.callsInLastTenSeconds++;
-  },
-};
-
-async function fetchUsdcData(): Promise<UsdcData[]> {
-  const connection = new Connection(
-    'https://api.mainnet-beta.solana.com',
-    'confirmed',
-  );
-  const usdcMint = new PublicKey(
-    'B5yxyzu1DpTRLDLffn3ycoytp17dMFAnyiUWypsqrqB1',
-  );
-
-  try {
-    await rateLimiter.throttle();
-
-    const response = await connection.getTokenAccountsByOwner(
-      usdcMint,
-      { mint: usdcMint },
-      { encoding: 'jsonParsed' },
-    );
-
-    if (response.value.length === 0) {
-      throw new Error('No USDC account found');
-    }
-
-    const accountInfo = response.value[0].account.data.parsed.info;
-    const usdcAmount = parseFloat(accountInfo.tokenAmount.uiAmountString);
-
-    // Since we only have current data, we'll create a single data point
-    const currentDate = new Date();
-    const data: UsdcData[] = [
-      {
-        date: currentDate.toISOString().split('T')[0],
-        value: usdcAmount,
-      },
-    ];
-
-    return data;
-  } catch (error) {
-    console.error('Error fetching USDC data:', error);
-    if (error instanceof Error) {
-      if (error.message.includes('403')) {
-        throw new Error('Access denied. Consider using a private RPC server.');
-      } else if (error.message.includes('429')) {
-        throw new Error('Rate limit exceeded. Please try again later.');
-      }
-    }
-    throw error;
-  }
-}
-
 interface PerformanceChartProps {
   isDarkMode: boolean;
 }
 
 export function PerformanceChart({ isDarkMode }: PerformanceChartProps) {
-  const [isMounted, setIsMounted] = useState(false);
-  const [data, setData] = useState<UsdcData[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [balance, setBalance] = useState<number | null>(null);
+  const [slot, setSlot] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setIsMounted(true);
-    fetchUsdcData()
-      .then((fetchedData) => {
-        setData(fetchedData);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error('Error fetching USDC data:', err);
-        setError(
-          err.message || 'Failed to fetch USDC data. Please try again later.',
+    const fetchData = async () => {
+      try {
+        const solana = new Connection(
+          process.env.NEXT_PUBLIC_SOLANA_RPC_URL || '',
         );
-        setIsLoading(false);
-      });
+
+        // Fetch the current slot
+        const currentSlot = await solana.getSlot();
+        setSlot(currentSlot);
+
+        // Fetch the balance
+        const publicKey = new PublicKey(
+          'B5yxyzu1DpTRLDLffn3ycoytp17dMFAnyiUWypsqrqB1',
+        );
+        const balanceInLamports = await solana.getBalance(publicKey);
+        const balanceInSOL = balanceInLamports / LAMPORTS_PER_SOL;
+        setBalance(balanceInSOL);
+      } catch (err) {
+        console.error('Error fetching data:', err);
+        setError('Failed to fetch data. Please try again later.');
+      }
+    };
+
+    fetchData();
   }, []);
-
-  if (!isMounted) {
-    return null;
-  }
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -131,9 +61,15 @@ export function PerformanceChart({ isDarkMode }: PerformanceChartProps) {
     color: textColor,
   };
 
+  // Create a simple dataset with the current balance
+  const data =
+    balance !== null
+      ? [{ date: new Date().toISOString().split('T')[0], value: balance }]
+      : [];
+
   return (
     <>
-      {data.length > 0 ? (
+      {balance !== null && slot !== null ? (
         <>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={data}>
@@ -154,15 +90,17 @@ export function PerformanceChart({ isDarkMode }: PerformanceChartProps) {
             </LineChart>
           </ResponsiveContainer>
           <p style={{ color: textColor, fontSize: '1em', textAlign: 'center' }}>
-            Current USDC Supply: {data[0].value.toLocaleString()} USDC
+            Current Balance: {balance.toLocaleString()} SOL
+          </p>
+          <p style={{ color: textColor, fontSize: '1em', textAlign: 'center' }}>
+            Current Slot: {slot.toLocaleString()}
           </p>
         </>
       ) : (
-        <p>No data available</p>
+        <p>Loading...</p>
       )}
       <p style={{ color: textColor, fontSize: '0.8em', textAlign: 'center' }}>
-        Note: This app uses a public RPC endpoint. For production use, please
-        consider using a dedicated/private RPC server.
+        Note: This app uses a QuickNode RPC endpoint.
       </p>
     </>
   );
