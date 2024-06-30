@@ -95,14 +95,14 @@ export function FundDetails() {
               />
             </div>
           </Card>
-          <div className="flex flex-col space-y-4 md:w-1/3">
-            <Card className="p-6">
+          <div className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+            <Card className="p-6 sm:w-1/2">
               <h2 className="mb-2 text-xl font-semibold">NAV</h2>
               <div className="text-3xl font-bold">100.00</div>
               <div className="text-sm text-gray-500">1 Day NAV Change</div>
               <div className="text-green-500">↑ 1.00 (1.00%)</div>
             </Card>
-            <Card className="p-6">
+            <Card className="p-6 sm:w-1/2">
               <h2 className="mb-2 text-xl font-semibold">AUM</h2>
               <div className="text-3xl font-bold">21.0M</div>
               <div className="text-sm text-gray-500">1 Day AUM Change</div>
