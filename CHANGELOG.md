@@ -1,3 +1,16 @@
+# [1.9.0](https://github.com/dhiazfathra/frontend-starter/compare/v1.8.0...v1.9.0) (2024-06-30)
+
+
+### Features
+
+* integrate solana usdc data ([a667d93](https://github.com/dhiazfathra/frontend-starter/commit/a667d9317c37d8521bfb02339843e2693c3eab29))
+* integrate solana usdc data form project serum ([6f99744](https://github.com/dhiazfathra/frontend-starter/commit/6f997442dbdcfbc1c958aa2748e77c0f7114dda5))
+
+
+### Performance Improvements
+
+* remove unnecessary extra solana api calls ([9f7aba2](https://github.com/dhiazfathra/frontend-starter/commit/9f7aba25fb43486e403ee9e25acbef3f5fd4ebdc))
+
 # [1.8.0](https://github.com/dhiazfathra/frontend-starter/compare/v1.7.0...v1.8.0) (2024-06-30)
 
 
