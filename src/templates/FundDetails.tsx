@@ -72,20 +72,21 @@ export function FundDetails() {
               <FundInfoCard
                 title="Fees"
                 value={
-                  <div className="grid grid-cols-2 gap-x-2 text-xs sm:gap-x-4 sm:text-xs md:text-sm">
-                    <div>
-                      <div className="whitespace-nowrap text-xs font-medium text-gray-500">
+                  <div className="grid grid-cols-2 gap-2 text-xs sm:gap-x-4 sm:text-xs md:text-sm">
+                    <div className="py-1">
+                      <div className="mb-1 whitespace-nowrap py-1 text-xs font-medium text-gray-500">
                         Management: 1.5%
                       </div>
-                      <div className="whitespace-nowrap text-xs font-medium text-gray-500">
+                      <div className="whitespace-nowrap py-1 text-xs font-medium text-gray-500">
                         Performance: 10%
                       </div>
                     </div>
-                    <div>
-                      <div className="whitespace-nowrap text-xs font-medium text-gray-500">
+
+                    <div className="py-1">
+                      <div className="mb-1 whitespace-nowrap py-1 text-xs font-medium text-gray-500">
                         Subscription: 0%
                       </div>
-                      <div className="whitespace-nowrap text-xs font-medium text-gray-500">
+                      <div className="whitespace-nowrap py-1 text-xs font-medium text-gray-500">
                         Redemption: 0%
                       </div>
                     </div>
