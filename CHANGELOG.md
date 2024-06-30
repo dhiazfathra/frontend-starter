@@ -1,3 +1,11 @@
+# [1.10.0](https://github.com/dhiazfathra/frontend-starter/compare/v1.9.0...v1.10.0) (2024-06-30)
+
+
+### Features
+
+* implement trading chart ([a7bd8f6](https://github.com/dhiazfathra/frontend-starter/commit/a7bd8f64455854f1f5c9bb499741e0d3a7ddc32a))
+* implement trading chart ([231dc84](https://github.com/dhiazfathra/frontend-starter/commit/231dc842adc06cb5ffa2032f3ac18bd3ba405d1a))
+
 # [1.9.0](https://github.com/dhiazfathra/frontend-starter/compare/v1.8.0...v1.9.0) (2024-06-30)
 
 
