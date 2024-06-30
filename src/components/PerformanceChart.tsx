@@ -25,7 +25,10 @@ function generateGbsData(startDate: Date, endDate: Date): GbsData[] {
     const currentDate: Date = new Date(startDate);
     currentDate.setDate(startDate.getDate() + i);
 
-    const value: number = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;
+    const randomValueZeroToThousand: number = Math.floor(Math.random() * 1001);
+
+    // Apply the projection formula for the range 25.4 to 26.23
+    const value: number = 0.00083 * randomValueZeroToThousand + 25.4;
 
     data.push({
       date: currentDate.toISOString().split('T')[0] ?? '',
@@ -34,8 +37,8 @@ function generateGbsData(startDate: Date, endDate: Date): GbsData[] {
   }
 
   if (data && data.length > 0) {
-    data[0]!.value = 100;
-    data[data.length - 1]!.value = 1000;
+    data[0]!.value = 25.4; // Enforce the first value
+    data[data.length - 1]!.value = 26.23; // Enforce the last value
   }
 
   return data;
@@ -58,11 +61,11 @@ export function PerformanceChart({ isDarkMode }: PerformanceChartProps) {
   }, []);
 
   if (!isMounted) {
-    return null; // or a loading placeholder
+    return null;
   }
 
   const textColor = isDarkMode ? '#ffffff' : '#000000';
-  const lineColor = isDarkMode ? '#8884d8' : '#82ca9d';
+  const lineColor = isDarkMode ? '#4287f5' : '#1e90ff';
   const tooltipStyle = {
     backgroundColor: isDarkMode ? '#333' : '#fff',
     border: 'none',
@@ -74,8 +77,12 @@ export function PerformanceChart({ isDarkMode }: PerformanceChartProps) {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <LineChart data={data}>
-        <XAxis dataKey="name" stroke={textColor} />
-        <YAxis domain={['dataMin', 'dataMax']} stroke={textColor} />
+        <XAxis dataKey="name" hide />
+        <YAxis
+          domain={['dataMin', 'dataMax']}
+          stroke={textColor}
+          orientation="right"
+        />
         <Tooltip contentStyle={tooltipStyle} />
         <Line
           type="monotone"
