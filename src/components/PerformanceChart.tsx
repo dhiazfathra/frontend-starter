@@ -46,11 +46,7 @@ const endDate: Date = new Date('2024-06-30');
 
 const data: GbsData[] = generateGbsData(startDate, endDate);
 
-interface PerformanceChartProps {
-  isDarkMode: boolean;
-}
-
-export function PerformanceChart({ isDarkMode }: PerformanceChartProps) {
+export function PerformanceChart() {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -61,10 +57,10 @@ export function PerformanceChart({ isDarkMode }: PerformanceChartProps) {
     return null; // or a loading placeholder
   }
 
-  const textColor = isDarkMode ? '#ffffff' : '#000000';
-  const lineColor = isDarkMode ? '#8884d8' : '#82ca9d';
+  const textColor = '#ffffff';
+  const lineColor = '#1E90FF'; // Dodger Blue
   const tooltipStyle = {
-    backgroundColor: isDarkMode ? '#333' : '#fff',
+    backgroundColor: '#333',
     border: 'none',
     borderRadius: '5px',
     padding: '10px',
@@ -73,12 +69,12 @@ export function PerformanceChart({ isDarkMode }: PerformanceChartProps) {
 
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <LineChart data={data}>
-        <XAxis dataKey="name" stroke={textColor} />
+      <LineChart data={data} style={{ backgroundColor: '#1a1a1a' }}>
+        <XAxis dataKey="date" stroke={textColor} />
         <YAxis domain={['dataMin', 'dataMax']} stroke={textColor} />
         <Tooltip contentStyle={tooltipStyle} />
         <Line
-          type="monotone"
+          type="linear"
           dataKey="value"
           stroke={lineColor}
           strokeWidth={2}
