@@ -1,5 +1,6 @@
 'use client';
 
+import { Connection, PublicKey } from '@solana/web3.js';
 import { useEffect, useState } from 'react';
 import {
   Line,
@@ -10,13 +11,21 @@ import {
   YAxis,
 } from 'recharts';
 
-interface GbsData {
+interface UsdcData {
   date: string;
   value: number;
 }
 
-function generateGbsData(startDate: Date, endDate: Date): GbsData[] {
-  const data: GbsData[] = [];
+async function fetchUsdcData(
+  startDate: Date,
+  endDate: Date,
+): Promise<UsdcData[]> {
+  const connection = new Connection('https://api.mainnet-beta.solana.com');
+  const usdcMint = new PublicKey(
+    'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+  ); // USDC mint address on Solana
+
+  const data: UsdcData[] = [];
   const days: number = Math.floor(
     (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24),
   );
@@ -25,20 +34,14 @@ function generateGbsData(startDate: Date, endDate: Date): GbsData[] {
     const currentDate: Date = new Date(startDate);
     currentDate.setDate(startDate.getDate() + i);
 
-    const randomValueZeroToThousand: number = Math.floor(Math.random() * 1001);
-
-    // Apply the projection formula for the range 25.4 to 26.23
-    const value: number = 0.00083 * randomValueZeroToThousand + 25.4;
+    // Fetch USDC supply for the current date
+    const supply = await connection.getTokenSupply(usdcMint);
+    const value = parseFloat(supply.value.uiAmount?.toFixed(2) ?? '0');
 
     data.push({
       date: currentDate.toISOString().split('T')[0] ?? '',
       value,
     });
-  }
-
-  if (data && data.length > 0) {
-    data[0]!.value = 25.4; // Enforce the first value
-    data[data.length - 1]!.value = 26.23; // Enforce the last value
   }
 
   return data;
@@ -47,17 +50,17 @@ function generateGbsData(startDate: Date, endDate: Date): GbsData[] {
 const startDate: Date = new Date('2024-06-01');
 const endDate: Date = new Date('2024-06-30');
 
-const data: GbsData[] = generateGbsData(startDate, endDate);
-
 interface PerformanceChartProps {
   isDarkMode: boolean;
 }
 
 export function PerformanceChart({ isDarkMode }: PerformanceChartProps) {
   const [isMounted, setIsMounted] = useState(false);
+  const [data, setData] = useState<UsdcData[]>([]);
 
   useEffect(() => {
     setIsMounted(true);
+    fetchUsdcData(startDate, endDate).then(setData);
   }, []);
 
   if (!isMounted) {
@@ -77,7 +80,7 @@ export function PerformanceChart({ isDarkMode }: PerformanceChartProps) {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <LineChart data={data}>
-        <XAxis dataKey="name" hide />
+        <XAxis dataKey="date" stroke={textColor} />
         <YAxis
           domain={['dataMin', 'dataMax']}
           stroke={textColor}
