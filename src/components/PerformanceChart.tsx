@@ -37,7 +37,7 @@ const rateLimiter = {
 
 async function fetchUsdcData(): Promise<UsdcData[]> {
   const connection = new Connection(
-    'https://rpc-mainnet.helius.xyz/?api-key=37f7d681-7048-4af9-b03e-12b3aef66968',
+    'https://api.mainnet-beta.solana.com',
     'confirmed',
   );
   const usdcMint = new PublicKey(
