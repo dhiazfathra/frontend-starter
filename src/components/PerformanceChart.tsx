@@ -5,7 +5,10 @@ import { createChart } from 'lightweight-charts';
 import React, { useEffect, useRef, useState } from 'react';
 
 export function PerformanceChart() {
-  const [balance, setBalance] = useState<number | null>(null);
+  const [balanceData, setBalanceData] = useState<
+    { time: string; value: number }[]
+  >([]);
+  const [currentBalance, setCurrentBalance] = useState<number | null>(null);
   const [slot, setSlot] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const chartContainerRef = useRef<HTMLDivElement>(null);
@@ -18,7 +21,6 @@ export function PerformanceChart() {
     return `${year}-${month}-${day}`;
   };
 
-  // FIXME: This is rendered twice and can be optimized
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -26,16 +28,47 @@ export function PerformanceChart() {
           process.env.NEXT_PUBLIC_SOLANA_RPC_URL || '',
         );
 
-        const currentSlot = await solana.getSlot();
-        setSlot(currentSlot);
-
         const publicKey = new PublicKey(
           'B5yxyzu1DpTRLDLffn3ycoytp17dMFAnyiUWypsqrqB1',
         );
-        const balanceInLamports = await solana.getBalance(publicKey);
-        const balanceInSOL = balanceInLamports / LAMPORTS_PER_SOL;
-        setBalance(balanceInSOL);
 
+        // Get the current slot
+        const currentSlot = await solana.getSlot();
+        setSlot(currentSlot);
+
+        // Get current balance
+        const currentBalanceInLamports = await solana.getBalance(publicKey);
+        const currentBalanceInSOL = currentBalanceInLamports / LAMPORTS_PER_SOL;
+        setCurrentBalance(currentBalanceInSOL);
+
+        // Generate dates for the past 30 days
+        const dates = Array.from({ length: 30 }, (_, i) => {
+          const date = new Date();
+          date.setDate(date.getDate() - i);
+          return formatDate(date);
+        }).reverse();
+
+        // Fetch balances for each day
+        const balanceHistory = await Promise.all(
+          dates.map(async (date) => {
+            const unixTimestamp = Math.floor(new Date(date).getTime() / 1000);
+            const balanceInLamports = await solana.getBalanceAndContext(
+              publicKey,
+              {
+                minContextSlot: 0,
+                maxContextSlot: await solana.getSlot(unixTimestamp),
+              },
+            );
+            return {
+              time: date,
+              value: balanceInLamports.value / LAMPORTS_PER_SOL,
+            };
+          }),
+        );
+
+        setBalanceData(balanceHistory);
+
+        // Create and update chart
         if (chartContainerRef.current && !chartRef.current) {
           const chart = createChart(chartContainerRef.current, {
             width: chartContainerRef.current.clientWidth,
@@ -48,9 +81,7 @@ export function PerformanceChart() {
             lineWidth: 2,
           });
 
-          lineSeries.setData([
-            { time: formatDate(new Date()), value: balanceInSOL },
-          ]);
+          lineSeries.setData(balanceHistory);
 
           chart.timeScale().fitContent();
         }
@@ -77,10 +108,10 @@ export function PerformanceChart() {
   return (
     <>
       <div ref={chartContainerRef} style={{ width: '100%', height: '300px' }} />
-      {balance !== null && slot !== null ? (
+      {currentBalance !== null && slot !== null ? (
         <>
           <p style={{ fontSize: '1em', textAlign: 'center' }}>
-            Current Balance: {balance.toLocaleString()} SOL
+            Current Balance: {currentBalance.toLocaleString()} SOL
           </p>
           <p style={{ fontSize: '1em', textAlign: 'center' }}>
             Current Slot: {slot.toLocaleString()}
