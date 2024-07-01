@@ -5,9 +5,6 @@ import { createChart } from 'lightweight-charts';
 import React, { useEffect, useRef, useState } from 'react';
 
 export function PerformanceChart() {
-  const [balanceData, setBalanceData] = useState<
-    { time: string; value: number }[]
-  >([]);
   const [currentBalance, setCurrentBalance] = useState<number | null>(null);
   const [slot, setSlot] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -51,12 +48,10 @@ export function PerformanceChart() {
         // Fetch balances for each day
         const balanceHistory = await Promise.all(
           dates.map(async (date) => {
-            const unixTimestamp = Math.floor(new Date(date).getTime() / 1000);
             const balanceInLamports = await solana.getBalanceAndContext(
               publicKey,
               {
                 minContextSlot: 0,
-                maxContextSlot: await solana.getSlot(unixTimestamp),
               },
             );
             return {
@@ -65,8 +60,6 @@ export function PerformanceChart() {
             };
           }),
         );
-
-        setBalanceData(balanceHistory);
 
         // Create and update chart
         if (chartContainerRef.current && !chartRef.current) {
