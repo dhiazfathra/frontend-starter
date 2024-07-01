@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/dhiazfathra/frontend-starter/compare/v1.10.0...v1.10.1) (2024-07-01)
+
+
+### Bug Fixes
+
+* remove unnecessary vars in chart file ([cd9e960](https://github.com/dhiazfathra/frontend-starter/commit/cd9e960bcea7981294764b8c8187a9a02304e330))
+
 # [1.10.0](https://github.com/dhiazfathra/frontend-starter/compare/v1.9.0...v1.10.0) (2024-06-30)
 
 
