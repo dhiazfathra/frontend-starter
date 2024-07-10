@@ -1,5 +1,5 @@
 const Footer = () => {
-  return <footer>{/* TODO: Content here */}</footer>;
+  return <footer>{/* TODO: Add content here */}</footer>;
 };
 
 export { Footer };
