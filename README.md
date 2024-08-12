@@ -6,7 +6,7 @@ https://github.com/ixartz/SaaS-Boilerplate
 
 🚀 Boilerplate and Starter for Next.js with App Router support, Tailwind CSS and TypeScript ⚡️ Made with developer experience first: Next.js, TypeScript, ESLint, Prettier, Husky, Lint-Staged, Vitest (replacing Jest), Testing Library, Commitlint, VSCode, PostCSS, Tailwind CSS, Error Monitoring with [Sentry](https://sentry.io/for/nextjs/?utm_source=github&utm_medium=paid-community&utm_campaign=general-fy25q1-nextjs&utm_content=github-banner-nextjsboilerplate-logo), Logging with Pino.js and Log Management, Monitoring as Code, Storybook, Multi-language (i18n), and more.
 
-Check the live demo at [React starter](https://frontend-starterct-starter.vercel.app/).
+Check the live demo at [React starter](https://frontend-starter-xi.vercel.app/).
 
 ### Features
 
